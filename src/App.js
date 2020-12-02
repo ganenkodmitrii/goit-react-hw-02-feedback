@@ -8,22 +8,36 @@ export default class App extends Component {
         bad: 0,
     };
 
-    handleAddStatisticsGood = () => {
+    handleAddStatistics = statistic => {
         this.setState(prevStatistic => ({
-            good: prevStatistic.good + 1,
+            [statistic]: prevStatistic[statistic] + 1,
         }));
     };
 
-    handleAddStatisticsNeutral = () => {
-        this.setState(prevStatistic => ({
-            neutral: prevStatistic.neutral + 1,
-        }));
+    // handleAddStatisticsGood = () => {
+    //     this.setState(prevStatistic => ({
+    //         good: prevStatistic.good + 1,
+    //     }));
+    // };
+
+    // handleAddStatisticsNeutral = () => {
+    //     this.setState(prevStatistic => ({
+    //         neutral: prevStatistic.neutral + 1,
+    //     }));
+    // };
+
+    // handleAddStatisticsBad = () => {
+    //     this.setState(prevStatistic => ({
+    //         bad: prevStatistic.bad + 1,
+    //     }));
+    // };
+
+    countTotalFeedback = () => {
+        return Object.values(this.state).reduce((acc, item) => acc + item, 0);
     };
 
-    handleAddStatisticsBad = () => {
-        this.setState(prevStatistic => ({
-            bad: prevStatistic.bad + 1,
-        }));
+    countPositiveFeedbackPercentage = () => {
+        return Math.round((this.state.good / this.countTotalFeedback()) * 100);
     };
 
     render() {
@@ -40,7 +54,19 @@ export default class App extends Component {
                         Please leave feedback
                     </h1>
 
-                    <button
+                    <div>
+                        {Object.keys(this.state).map(item => (
+                            <button
+                                type="button"
+                                style={{ marginRight: '5px' }}
+                                key={item}
+                                onClick={() => this.handleAddStatistics(item)}
+                            >
+                                {item}
+                            </button>
+                        ))}
+                    </div>
+                    {/* <button
                         type="button"
                         style={{ marginRight: '5px' }}
                         onClick={this.handleAddStatisticsGood}
@@ -56,27 +82,57 @@ export default class App extends Component {
                     </button>
                     <button type="button" onClick={this.handleAddStatisticsBad}>
                         bad
-                    </button>
-                    <p
+                    </button> */}
+
+                    <div>
+                        {Object.keys(this.state).map(item => (
+                            <p
+                                style={{
+                                    color: 'white',
+                                }}
+                                key={item}
+                            >
+                                {/* function(item) */}
+                                {item}: {this.state[item]}
+                            </p>
+                        ))}
+                    </div>
+
+                    {/* <p
                         style={{
                             color: 'white',
                         }}
                     >
-                        good: {this.state.good}
+                        Good: {this.state.good}
                     </p>
                     <p
                         style={{
                             color: 'white',
                         }}
                     >
-                        neutral: {this.state.neutral}
+                        Neutral: {this.state.neutral}
                     </p>
                     <p
                         style={{
                             color: 'white',
                         }}
                     >
-                        bad: {this.state.bad}
+                        Bad: {this.state.bad}
+                    </p> */}
+                    <p
+                        style={{
+                            color: 'white',
+                        }}
+                    >
+                        total: {this.countTotalFeedback()}
+                    </p>
+                    <p
+                        style={{
+                            color: 'white',
+                        }}
+                    >
+                        Positive feedback:
+                        {this.countPositiveFeedbackPercentage()}%
                     </p>
                 </div>
             </Container>
