@@ -1,8 +1,12 @@
+// import { Component } from 'react';
 import Container from './components/Container/Container';
 import FeedbackOptions from './components/FeedbackOptions/FeedbackOptions';
 import Section from './components/Section/Section';
 import Statistics from './components/Statistics/Statistics';
+import Notification from './components/Notification/Notification';
+
 const { Component } = require('react');
+
 export default class App extends Component {
     state = {
         good: 0,
@@ -21,12 +25,14 @@ export default class App extends Component {
     };
 
     countPositiveFeedbackPercentage = () => {
-        return Math.round((this.state.good / this.countTotalFeedback()) * 100);
+        return (
+            Math.round((this.state.good / this.countTotalFeedback()) * 100) || 0
+        );
     };
 
     render() {
         return (
-            <Container>
+            <Container title="Cafe «Expresso»">
                 <Section title="Please leave feedback">
                     <FeedbackOptions
                         options={this.state}
@@ -34,14 +40,18 @@ export default class App extends Component {
                     />
                 </Section>
                 <Section title="Statistics">
-                    <Statistics
-                        options={this.state}
-                        // good={}
-                        // neutral={}
-                        // bad={}
-                        total={this.countTotalFeedback()}
-                        positivePercentage={this.countPositiveFeedbackPercentage()}
-                    />
+                    {this.countTotalFeedback() ? (
+                        <Statistics
+                            options={this.state}
+                            // good={}
+                            // neutral={}
+                            // bad={}
+                            total={this.countTotalFeedback()}
+                            positivePercentage={this.countPositiveFeedbackPercentage()}
+                        />
+                    ) : (
+                        <Notification message="No feedback given" />
+                    )}
                 </Section>
             </Container>
         );

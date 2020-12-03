@@ -1,0 +1,35 @@
+.boxButton {
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.button {
+    appearance: none;
+    border: 0;
+    border-radius: 5px;
+    background: #b94c21;
+    color: #f5dc6d;
+    padding: 8px 16px;
+    font-family: inherit;
+    font-size: 16px;
+
+    transition: transform 250ms linear;
+}
+
+.button:hover {
+    color: #b94c21;
+    background: #f0af38;
+    transform: scale(1.1);
+}
+
+.button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px #f5dc6d;
+}
+
+.button:not(:last-child) {
+    margin-right: 10px;
+}

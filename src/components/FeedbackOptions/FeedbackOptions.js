@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import capitalizeFirstLetter from '../capitalizeFirstLetter/capitalizeFirstLetter';
-
+import s from './FeedbackOptions.module.css';
 const FeedbackOptions = ({ options, onLeaveFeedback }) => {
     return (
-        <div>
+        <div className={s.boxButton}>
             {Object.keys(options).map(item => (
                 <button
                     type="button"
-                    style={{ marginRight: '5px' }}
+                    className={s.button}
                     key={item}
                     onClick={() => onLeaveFeedback(item)}
                 >

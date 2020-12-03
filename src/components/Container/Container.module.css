@@ -9,3 +9,9 @@
     background-repeat: repeat;
     text-align: center;
 }
+
+.title {
+    color: #b94c21;
+    margin: 0;
+    padding-top: 60px;
+}

@@ -1,35 +1,18 @@
 import PropTypes from 'prop-types';
+import s from './Statistics.module.css';
 
 import capitalizeFirstLetter from '../capitalizeFirstLetter/capitalizeFirstLetter';
 
 const Statistics = ({ options, total, positivePercentage }) => {
     return (
-        <div>
+        <div className={s.list}>
             {Object.keys(options).map(item => (
-                <p
-                    style={{
-                        color: 'white',
-                    }}
-                    key={item}
-                >
+                <p className={s.item} key={item}>
                     {capitalizeFirstLetter(item)}: {options[item]}
                 </p>
             ))}
-            <p
-                style={{
-                    color: 'white',
-                }}
-            >
-                Total: {total}
-            </p>
-            <p
-                style={{
-                    color: 'white',
-                }}
-            >
-                Positive feedback:
-                {positivePercentage}%
-            </p>
+            <p className={s.item}>Total: {total}</p>
+            <p className={s.item}>Positive feedback: {positivePercentage} %</p>
         </div>
     );
 };
